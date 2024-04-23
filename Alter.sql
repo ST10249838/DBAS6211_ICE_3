@@ -1,0 +1,1 @@
+ALTER TABLE Venues ADD Max_Capacity SMALLINT;
