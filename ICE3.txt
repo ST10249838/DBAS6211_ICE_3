@@ -1,0 +1,63 @@
+CREATE SCHEMA ICE3;
+USE ICE3;
+
+-- Q.1.1
+CREATE TABLE Modules(
+Module_Code VARCHAR(10) NOT NULL,
+Module_Name VARCHAR(50) NOT NULL,
+PRIMARY KEY(Module_Code)
+);
+
+CREATE TABLE Venues(
+Venue_Code VARCHAR(5) NOT NULL,
+Venue_Name VARCHAR(50) NOT NULL,
+Address VARCHAR(50) NOT NULL,
+City VARCHAR(50) NOT NULL,
+PRIMARY KEY(Venue_Code)
+);
+
+CREATE TABLE Assesment_Bookings(
+Module_Code VARCHAR(10) NOT NULL,
+Venue_Code VARCHAR(5) NOT NULL,
+Assesment_Date DATE NOT NULL,
+Start_Time TIME NOT NULL,
+Duration SMALLINT NOT NULL,
+Marks SMALLINT NOT NULL,
+PRIMARY KEY(Module_Code, Venue_Code, Assesment_Date, Start_Time),
+FOREIGN KEY(Module_Code) REFERENCES Modules(Module_Code),
+FOREIGN KEY(Venue_Code) REFERENCES Venues(Venue_Code)
+);
+
+-- Q.1.2
+INSERT INTO Modules(Module_Code, Module_Name) VALUES
+("DATA6212", "Database Intermediate"),
+("SQAT6312", "Software Quality and Testing"),
+("CNOS5112", "Client Systems Configuration"),
+("WEDE6011", "Web Development Intermediate"),
+("ISEC6311", "Information Security");
+
+INSERT INTO Venues(Venue_Code, Venue_Name, Address, City) VALUES
+("V0001", "Auditorium", "12 Radar Drive", "Durban"),
+("V0002", "Lecture Hall B", "116 Clearwater Road", "Pretoria"),
+("V0003", "Block A, Room 5", "1 Waterstone Drive", "Sandton"),
+("V0004", "Lecture Hall 4", "2 Ring Road", "Port Elizabeth"),
+("V0005", "Building 3, Room 2", "1 Belmont Road", "Cape Town");
+
+INSERT INTO Assesment_Bookings(Module_Code, Venue_Code, Assesment_Date, Start_Time, Duration, Marks) VALUES 
+('DATA6212', 'V0001', '2019-10-30', '09:00', 90, 60),
+('CNOS5112', 'V0005', '2019-11-19', '10:00', 150, 100),
+('SQAT6312', 'V0004', '2019-10-15', '14:30', 120, 90),
+('WEDE6011', 'V0002', '2019-09-10', '09:00', 90, 60),
+('SQAT6312', 'V0001', '2019-12-15', '14:30', 60, 40),
+('DATA6212', 'V0002', '2019-11-01', '09:00', 120, 80),
+('SQAT6312', 'V0003', '2019-09-29', '10:00', 90, 60);
+
+-- Q.1.3
+ALTER TABLE Venues ADD Max_Capacity SMALLINT;
+
+-- Q.1.4
+UPDATE Venues SET Max_Capacity = 300 WHERE Venue_Code = "V0001";
+UPDATE Venues SET Max_Capacity = 120 WHERE Venue_Code = "V0002";
+UPDATE Venues SET Max_Capacity = 100 WHERE Venue_Code = "V0003";
+UPDATE Venues SET Max_Capacity = 150 WHERE Venue_Code = "V0004";
+UPDATE Venues SET Max_Capacity = 100 WHERE Venue_Code = "V0005";
