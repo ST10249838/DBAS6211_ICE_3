@@ -1,3 +1,4 @@
+-- Q.1.2
 INSERT INTO Modules(Module_Code, Module_Name) VALUES
 ("DATA6212", "Database Intermediate"),
 ("SQAT6312", "Software Quality and Testing"),
